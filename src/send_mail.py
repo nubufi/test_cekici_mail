@@ -31,6 +31,7 @@ def send_mail(template_context):
     try:
         yibf = template_context["yibf"]
         bore_axises = template_context["bore_axises"]
+        building_element = template_context["building_element"]
         mail_content = f"""
             Yibf No : {yibf}
             Karot Alınan Elemanlar : {', '.join(bore_axises)}
@@ -45,7 +46,7 @@ def send_mail(template_context):
         message["To"] = receiver_address
         message[
             "Subject"
-        ] = "A test mail sent by Python. It has an attachment."  # The subject line
+        ] = f"{yibf} Yibf No'lu Yapının {building_element} Test Çekici Tutanağı."  # The subject line
         # The body and the attachments for the mail
         message.attach(MIMEText(mail_content, "plain"))
         part = MIMEBase("application", "octet-stream")
